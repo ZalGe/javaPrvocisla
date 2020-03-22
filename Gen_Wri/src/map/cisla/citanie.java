@@ -9,6 +9,7 @@ public class citanie
     @NotNull
     public static Vector<Integer> Read_N()
     {
+        // Čítanie zo súboru pomocou Scannera a následné zapísanie do vektora
         int cisla;
         Vector<Integer> v = new Vector<Integer>();
         try (Scanner sc = new Scanner(new FileReader("Cisla.txt")))
@@ -30,6 +31,7 @@ public class citanie
     @NotNull
     public static Vector<Integer> Read_P()
     {
+        // Čítanie zo súboru pomocou Scannera a následné zapísanie do vektora
         int a;
         Vector<Integer> w = new Vector<Integer>();
         try (Scanner sc = new Scanner(new FileReader("Prvocisla.txt")))

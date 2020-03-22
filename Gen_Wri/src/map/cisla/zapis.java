@@ -2,53 +2,39 @@ package map.cisla;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Vector;
 
 public class zapis
 {
-    public static void Write_N()
+    public static void Write_N() throws Exception
     {
-        try
+        // Buffrovaný zápis generovaných čísel do súboru
+        FileWriter writer = new FileWriter("Cisla.txt", true);
+        BufferedWriter bufferedWriter = new BufferedWriter(writer);
+        for (int i= 0;i<=999;++i)
         {
-            FileWriter writer = new FileWriter("Cisla.txt", true);
-            BufferedWriter bufferedWriter = new BufferedWriter(writer);
-            for (int i= 0;i<=999;++i)
-            {
-                bufferedWriter.write((generator.generate()) + " ");
-            }
+            bufferedWriter.write((generator.generate()) + " ");
+        }
 
-            bufferedWriter.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        bufferedWriter.close();
     }
 
     public static void Write_P() throws Exception
     {
+        // Prevod vektoru na Integer pole
         Vector<Integer> n = prvocisla.Prime();
         Integer [] PrimeNum = new Integer[n.size()];
         n.toArray(PrimeNum);
 
+        // Buffrovaný zápis pola do súboru
         FileWriter writer = new FileWriter("Prvocisla.txt", true);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
         int lenght = PrimeNum.length;
-
-        for (int i = 0; i<lenght;++i)
-        {
-            writer.write(PrimeNum[i] + " ");
+        for (Integer integer : PrimeNum) {
+            writer.write(integer + " ");
         }
-        writer.close();
+        bufferedWriter.close();
     }
 
-    public static void Write_F()
-    {
-        int c = uprava.Freq();
-        Integer[] Cnum = uprava.Clear();
-
-
-    }
 }

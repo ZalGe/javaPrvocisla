@@ -7,7 +7,7 @@ public class generator
     {
         Random rand = new Random();
         int rand_int= rand.nextInt(100);
-        System.out.println(+rand_int);
+
         return rand_int;
     }
 }

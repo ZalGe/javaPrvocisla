@@ -11,24 +11,26 @@ public class prvocisla
     public static Vector<Integer> Prime()
     {
         Vector<Integer> u = new Vector<Integer>();
+        // Načíta int pole
         int [] array = konverzia.Convertion_N();
-        for (int i = 0; i < array.length; i++) {
+        for (int value : array) {
+            // Vylúči z hladania 0,1
             boolean isPrime = true;
-            if (array[i] == 0)
+            if (value == 0)
                 isPrime = false;
-            if (array[i] == 1)
+            if (value == 1)
                 isPrime = false;
-            else
-            {
-                for (int j = 2; j <= array[i] / 2; j++) {
-                    if (array[i] % j == 0) {
+            else {
+                // Hladanie prvočísel
+                for (int j = 2; j <= value / 2; j++) {
+                    if (value % j == 0) {
                         isPrime = false;
                         break;
                     }
                 }
             }
             if (isPrime)
-                u.add(array[i]);
+                u.add(value);
         }
         return u;
     }

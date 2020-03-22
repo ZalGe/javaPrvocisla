@@ -1,91 +1,43 @@
 package map.cisla;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.*;
 
 public class uprava
 {
     public static List<Integer> Sort()
     {
-        /*Vector<Integer> l = citanie.Read_P();
-        Integer [] PrimeNum = new Integer[l.size()];
-        l.toArray(PrimeNum);
-         */
         int [] Prime_Num = konverzia.Convertion_P();
 
-        //Arrays.sort(Prime_Num);
-
-        /*LinkedHashSet <Integer> linkedHashSet = new LinkedHashSet<>(Arrays.asList(PrimeNum));
-        Integer[] Prime_Num = linkedHashSet.toArray(new Integer[]{});
-        System.out.println(Arrays.toString(Prime_Num));
-
-
-         */
-/*
-        int count =0;
-
-        for(int i=0;i<Prime_Num.length;i++)
-        {
-            count=1;
-            for(int j=i+1;j<=Prime_Num.length-1;j++)
-            {
-                if(Prime_Num[i]==Prime_Num[j] && Prime_Num[i]!='\0')
-                {
-                    count++;
-                    Prime_Num[j] = '\0';
-                }
-            }
-            if(Prime_Num[i]!='\0')
-            {
-                System.out.println(Prime_Num[i] + "     " + count);
-            }
-        }
-        return Prime_Num;*/
         Map<Integer, Integer> map = new HashMap<>();
         List<Integer> outputArray = new ArrayList<>();
 
-        // Assign elements and their count in the list and map
+        // Priradí prvočísla a ich počet do listu a mapy
         for (int current : Prime_Num) {
             int count = map.getOrDefault(current, 0);
             map.put(current, count + 1);
             outputArray.add(current);
         }
 
-        // Compare the map by value
+        // Porovný mapu podľa hodnoty
         SortComparator comp = new SortComparator(map);
 
-        // Sort the map using Collections CLass
-        Collections.sort(outputArray, comp);
+        // Zoradí mapu podľa výskytu
+        outputArray.sort(comp);
 
-        // Final Output
-       /* for (Integer i : outputArray) {
-            System.out.print(i + " ");
-        }*/
        return outputArray;
     }
 
-    public static Integer[] Clear()
+    public static void Freq() throws Exception
     {
-        List<Integer> cisla = uprava.Sort();
-        Integer [] Ccisla = new Integer[cisla.size()];
-        cisla.toArray(Ccisla);
 
-        LinkedHashSet <Integer> linkedHashSet = new LinkedHashSet<>(Arrays.asList(Ccisla));
-        Integer[] Prime_Num = linkedHashSet.toArray(new Integer[]{});
-        //System.out.println(Arrays.toString(Prime_Num));
-        return Prime_Num;
-    }
-
-    public static Vector<Integer> Freq()
-    {
-        Vector<Integer> b = new Vector<Integer>();
         int []freq_num = konverzia.Convertion_F();
-        //System.out.println(Arrays.toString(freq_num));
 
-        int count =0;
-
+        // Priradí k jednotlivým prvočíslam ich početnosť a zmaže duplicity
         for(int i=0;i<freq_num.length;i++)
         {
-            count=1;
+            int count=1;
             for(int j=i+1;j<=freq_num.length-1;j++)
             {
                 if(freq_num[i]==freq_num[j] && freq_num[i]!='\0')
@@ -94,42 +46,47 @@ public class uprava
                     freq_num[j] = '\0';
                 }
             }
-           if(freq_num[i]!='\0')
+            if(freq_num[i]!='\0')
             {
-                b.add(count);
-                //System.out.println(freq_num[i] + "     " + count);
+                // Výsledné hodnoty priradí do stringu a následne zapíše do súboru "Prvocisla.txt"
+                String str = freq_num[i] + "  " + count +"\n";
+
+                FileWriter writer = new FileWriter("Pocetnost.txt", true);
+                BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+                bufferedWriter.write(str);
+
+                bufferedWriter.close();
             }
         }
-        System.out.println(b);
-        return b;
     }
 }
 
-// Implement Comparator Interface to sort the values
+// Implementácia Comparator Interface na triedenie hodnôt
 class SortComparator implements Comparator<Integer> {
     private final Map<Integer, Integer> freqMap;
 
-    // Assign the specified map
+    // Priradí špecifikovanú mapu
     SortComparator(Map<Integer, Integer> tFreqMap)
     {
         this.freqMap = tFreqMap;
     }
 
-    // Compare the values
+    // Porovná hodnoty ...
     @Override
     public int compare(Integer k1, Integer k2)
     {
 
-        // Compare value by frequency
+        // ... podľa frekvencie
         int freqCompare = freqMap.get(k2).compareTo(freqMap.get(k1));
 
-        // Compare value if frequency is equal
+        // Porovná hodnoty ak je frekvencia ich výskytu rovnaká
         int valueCompare = k1.compareTo(k2);
 
-        // If frequency is equal, then just compare by value, otherwise -
-        // compare by the frequency.
+        // Porovnáva podľa hodnoty
         if (freqCompare == 0)
             return valueCompare;
+        // Porovná podľa frekvencie
         else
             return freqCompare;
     }

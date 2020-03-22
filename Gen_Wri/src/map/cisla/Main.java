@@ -2,18 +2,17 @@ package map.cisla;
 
 public class Main
 {
-    public static void main(String[] args) throws Exception {
-        //generator.generate();
-        //zapis.Write_N();
-        //citanie.Read_N();
-        //konverzia.Convertion_N();
-        //prvocisla.Prime();
-        //konverzia.Convertion_P_W();
-        //zapis.Write_P();
-        //citanie.Read_P();
-        //konverzia.Convertion_P();
-        //uprava.Sort();
-        uprava.Freq();
-        //uprava.Clear();
+    public static void main(String[] args) throws Exception
+    {
+        zapis.Write_N();                        // Zapíše vygenerované čísla do súboru "Cisla.txt"
+        citanie.Read_N();                       // Prečíta údaje zo súboru "Cisla.txt" a uloží ich do vektoru
+        konverzia.Convertion_N();               // Prevedie vektor na int pole
+        prvocisla.Prime();                      // Zo zadaných údajov vyberie prvočísla
+        zapis.Write_P();                        // Zapíše prvočísla do súboru "Prvocisla.txt"
+        citanie.Read_P();                       // Prečíta údaje zo súboru "Prvocisla.txt" a uloží ich do vektoru
+        konverzia.Convertion_P();               // Prevedie vektor na int pole
+        uprava.Sort();                          // Zadané prvočísla zoradí podľa počtu ich výskytu a zapíše do listu
+        konverzia.Convertion_F();               // Prevedie list na int pole
+        uprava.Freq();                          // Priradí k danému prvočíslu jeho početnosť v poli a zmaže duplicity zapíše do súboru "Pocetnost.txt"
     }
 }
